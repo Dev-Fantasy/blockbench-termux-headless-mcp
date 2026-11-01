@@ -77,13 +77,13 @@ Inside the Ubuntu session (`proot-distro login ubuntu --shared-tmp`):
 
 ```bash
 export DISPLAY=:0
-~/blockbench-arm64/scripts/run-blockbench.sh
+bash ~/blockbench-arm64/scripts/run-blockbench.sh
 ```
 
 `run-blockbench.sh` starts Electron with `--no-sandbox` and `--disable-dev-shm-usage`, which are required under proot. To open a model directly:
 
 ```bash
-scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
+bash scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
 ```
 
 ### Rendering on a phone GPU
@@ -91,7 +91,7 @@ scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
 Chromium has no direct access to the Android GPU here, so it falls back to software rendering. If the viewport is blank or WebGL fails, force SwiftShader:
 
 ```bash
-BB_EXTRA_ARGS="--use-gl=angle --use-angle=swiftshader" scripts/run-blockbench.sh
+BB_EXTRA_ARGS="--use-gl=angle --use-angle=swiftshader" bash scripts/run-blockbench.sh
 ```
 
 If it still fails, try `--disable-gpu`. Software rendering is usable for modeling but slow for large scenes. Keep the screen on and run `termux-wake-lock` in Termux for long sessions.
@@ -103,8 +103,8 @@ The headless server works on `.bbmodel` files directly over MCP stdio. It can ru
 One-shot call:
 
 ```bash
-~/blockbench-arm64/scripts/run-headless.sh --root ~/models --list
-~/blockbench-arm64/scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
+bash ~/blockbench-arm64/scripts/run-headless.sh --root ~/models --list
+bash ~/blockbench-arm64/scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
 ```
 
 ### Register it with an MCP client
@@ -151,7 +151,7 @@ Or run it straight from GitHub without cloning:
 `bbmodel_render` and `bbmodel_contact_sheet` run a WebGPU renderer under **Node**, not Bun. The first render installs `three`, `three-blockbench` and Dawn (about 130 MB) into `~/.cache/blockbench-mcp-headless`; set `BB_RENDER_HOME` or pass `--render-home <dir>` to move it. The install script already provides Node 24, so no extra setup is needed.
 
 ```bash
-scripts/run-headless.sh --root ~/models bbmodel_render '{"file":"sword.bbmodel","preset":"icon","view":"iso"}'
+bash scripts/run-headless.sh --root ~/models bbmodel_render '{"file":"sword.bbmodel","preset":"icon","view":"iso"}'
 ```
 
 Renders print PNG paths you can open from Termux or pull with `adb`.

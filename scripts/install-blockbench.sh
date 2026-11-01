@@ -80,9 +80,9 @@ cat <<EOF
 
 Done.
 
-Desktop app:
-  $BB_HOME/scripts/run-blockbench.sh   (or scripts/run-blockbench.sh from this repo)
+Desktop app (from this repo checkout):
+  bash scripts/run-blockbench.sh
 
-Headless MCP:
-  $BB_MCP_HOME/scripts/run-headless.sh --root ~/models --list
+Headless MCP (from this repo checkout):
+  bash scripts/run-headless.sh --root ~/models --list
 EOF
