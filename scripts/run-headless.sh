@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # One-shot wrapper for the headless Blockbench MCP server.
 # Examples:
-#   scripts/run-headless.sh --root ~/models --list
-#   scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
+#   bash scripts/run-headless.sh --root ~/models --list
+#   bash scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
 set -euo pipefail
 
 BB_MCP_HOME="${BB_MCP_HOME:-$HOME/blockbench-mcp}"
