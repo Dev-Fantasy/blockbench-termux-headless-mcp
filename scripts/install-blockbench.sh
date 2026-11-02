@@ -81,8 +81,8 @@ cat <<EOF
 Done.
 
 Desktop app (from this repo checkout):
-  bash scripts/run-blockbench.sh
+  bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh
 
 Headless MCP (from this repo checkout):
-  bash scripts/run-headless.sh --root ~/models --list
+  bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models --list
 EOF
