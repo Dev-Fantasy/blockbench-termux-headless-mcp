@@ -1,4 +1,4 @@
-# blockbench-arm64
+# blockbench-termux-headless-mcp
 
 Run **Blockbench** on an ARM64 Android device through Termux, and drive it headlessly with the **Blockbench MCP** server.
 
