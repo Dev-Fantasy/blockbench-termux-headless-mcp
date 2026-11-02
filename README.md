@@ -39,10 +39,12 @@ proot-distro install ubuntu
 termux-setup-storage   # optional: gives Ubuntu access to /sdcard
 ```
 
-Or just run the helper:
+Or clone this repo in Termux and run the helper instead of the commands above:
 
 ```bash
-bash scripts/termux-setup.sh
+pkg install -y git
+git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+bash ~/blockbench-termux-headless-mcp/scripts/termux-setup.sh
 ```
 
 ## 2. Install Blockbench inside Ubuntu
@@ -58,8 +60,8 @@ Inside Ubuntu:
 ```bash
 apt-get update
 apt-get install -y git
-git clone https://github.com/BluePhinix/blockbench-arm64.git
-cd blockbench-arm64
+git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+cd blockbench-termux-headless-mcp
 bash scripts/install-blockbench.sh
 ```
 
@@ -77,13 +79,13 @@ Inside the Ubuntu session (`proot-distro login ubuntu --shared-tmp`):
 
 ```bash
 export DISPLAY=:0
-bash ~/blockbench-arm64/scripts/run-blockbench.sh
+bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh
 ```
 
 `run-blockbench.sh` starts Electron with `--no-sandbox` and `--disable-dev-shm-usage`, which are required under proot. To open a model directly:
 
 ```bash
-bash scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
+bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
 ```
 
 ### Rendering on a phone GPU
@@ -91,7 +93,7 @@ bash scripts/run-blockbench.sh /sdcard/Download/model.bbmodel
 Chromium has no direct access to the Android GPU here, so it falls back to software rendering. If the viewport is blank or WebGL fails, force SwiftShader:
 
 ```bash
-BB_EXTRA_ARGS="--use-gl=angle --use-angle=swiftshader" bash scripts/run-blockbench.sh
+BB_EXTRA_ARGS="--use-gl=angle --use-angle=swiftshader" bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh
 ```
 
 If it still fails, try `--disable-gpu`. Software rendering is usable for modeling but slow for large scenes. Keep the screen on and run `termux-wake-lock` in Termux for long sessions.
@@ -103,8 +105,8 @@ The headless server works on `.bbmodel` files directly over MCP stdio. It can ru
 One-shot call:
 
 ```bash
-bash ~/blockbench-arm64/scripts/run-headless.sh --root ~/models --list
-bash ~/blockbench-arm64/scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
+bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models --list
+bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
 ```
 
 ### Register it with an MCP client
@@ -115,7 +117,7 @@ From the clone:
 {
   "mcpServers": {
     "blockbench-headless": {
-      "command": "bun",
+      "command": "/root/.bun/bin/bun",
       "args": [
         "run",
         "/root/blockbench-mcp/headless/index.ts",
@@ -133,7 +135,7 @@ Or run it straight from GitHub without cloning:
 {
   "mcpServers": {
     "blockbench-headless": {
-      "command": "bunx",
+      "command": "/root/.bun/bin/bunx",
       "args": [
         "github:jasonjgardner/blockbench-mcp-plugin#v1.10.1",
         "--root",
@@ -151,7 +153,7 @@ Or run it straight from GitHub without cloning:
 `bbmodel_render` and `bbmodel_contact_sheet` run a WebGPU renderer under **Node**, not Bun. The first render installs `three`, `three-blockbench` and Dawn (about 130 MB) into `~/.cache/blockbench-mcp-headless`; set `BB_RENDER_HOME` or pass `--render-home <dir>` to move it. The install script already provides Node 24, so no extra setup is needed.
 
 ```bash
-bash scripts/run-headless.sh --root ~/models bbmodel_render '{"file":"sword.bbmodel","preset":"icon","view":"iso"}'
+bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models bbmodel_render '{"file":"sword.bbmodel","preset":"icon","view":"iso"}'
 ```
 
 Renders print PNG paths you can open from Termux or pull with `adb`.
@@ -243,3 +245,9 @@ Run `termux-setup-storage` in Termux, then use `/sdcard` (or `/storage/emulated/
 - Pinned versions are deliberate. Update `BLOCKBENCH_TAG` / `BB_MCP_TAG` to move them.
 - No root and no custom kernel are required; everything runs in userspace via proot.
 - Software rendering and proot overhead make this slower than desktop. For heavy scenes, use the headless renderer (it uses Dawn/SwiftShader efficiently) or a desktop machine.
+
+## License
+
+Copyright (c) 2026-present BluePhinix
+
+Licensed under GPL-3.0-or-later. See [LICENSE](LICENSE). Blockbench and blockbench-mcp keep their own licenses.
