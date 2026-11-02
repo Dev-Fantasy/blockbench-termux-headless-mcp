@@ -28,7 +28,7 @@ Next:
   3. Enter Ubuntu with shared tmp:  proot-distro login ubuntu --shared-tmp
   4. Inside Ubuntu, clone this repo and run the installer:
        apt-get update && apt-get install -y git
-       git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+       git clone https://github.com/Dev-Fantasy/blockbench-termux-headless-mcp.git
        bash ~/blockbench-termux-headless-mcp/scripts/install-blockbench.sh
   5. Then launch the app with:
        export DISPLAY=:0
