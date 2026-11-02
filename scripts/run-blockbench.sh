@@ -7,7 +7,7 @@ DISPLAY="${DISPLAY:-:0}"
 export DISPLAY
 
 if [[ ! -x "$BB_HOME/node_modules/electron/dist/electron" ]]; then
-  echo "Blockbench/Electron not found in $BB_HOME. Run scripts/install-blockbench.sh first." >&2
+  echo "Blockbench/Electron not found in $BB_HOME. Run: bash ~/blockbench-termux-headless-mcp/scripts/install-blockbench.sh first." >&2
   exit 1
 fi
 
@@ -17,7 +17,7 @@ if [[ "$DISPLAY" == :* ]]; then
   if [[ -n "$display_num" && ! -S "/tmp/.X11-unix/X${display_num}" ]]; then
     echo "warning: no X socket for DISPLAY=$DISPLAY." >&2
     echo "Start Termux:X11 (termux-x11 :0 -ac &), log in with 'proot-distro login ubuntu --shared-tmp'," >&2
-    echo "or use an X server such as: xvfb-run -a scripts/run-blockbench.sh" >&2
+    echo "or use an X server such as: xvfb-run -a bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh" >&2
   fi
 fi
 
