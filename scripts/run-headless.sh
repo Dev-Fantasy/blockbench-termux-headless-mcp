@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # One-shot wrapper for the headless Blockbench MCP server.
 # Examples:
-#   bash scripts/run-headless.sh --root ~/models --list
-#   bash scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
+#   bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models --list
+#   bash ~/blockbench-termux-headless-mcp/scripts/run-headless.sh --root ~/models bbmodel_info '{"file":"sword.bbmodel"}'
 set -euo pipefail
 
 BB_MCP_HOME="${BB_MCP_HOME:-$HOME/blockbench-mcp}"
@@ -14,13 +14,13 @@ if [[ -z "$BUN_BIN" ]]; then
   elif [[ -x "$HOME/.bun/bin/bun" ]]; then
     BUN_BIN="$HOME/.bun/bin/bun"
   else
-    echo "Bun not found. Install it from https://bun.sh or run scripts/install-blockbench.sh." >&2
+    echo "Bun not found. Install it from https://bun.sh or run: bash ~/blockbench-termux-headless-mcp/scripts/install-blockbench.sh." >&2
     exit 1
   fi
 fi
 
 if [[ ! -f "$BB_MCP_HOME/headless/call.ts" ]]; then
-  echo "Headless MCP not found in $BB_MCP_HOME. Run scripts/install-blockbench.sh first," >&2
+  echo "Headless MCP not found in $BB_MCP_HOME. Run: bash ~/blockbench-termux-headless-mcp/scripts/install-blockbench.sh first," >&2
   echo "or set BB_MCP_HOME to the checkout of jasonjgardner/blockbench-mcp-plugin." >&2
   exit 1
 fi
