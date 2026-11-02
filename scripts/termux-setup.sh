@@ -26,9 +26,11 @@ Next:
   1. Install the Termux:X11 app from F-Droid (package com.termux.x11).
   2. Start the X server:            termux-x11 :0 -ac &
   3. Enter Ubuntu with shared tmp:  proot-distro login ubuntu --shared-tmp
-  4. Inside Ubuntu, clone this repo and run:
-       bash scripts/install-blockbench.sh
+  4. Inside Ubuntu, clone this repo and run the installer:
+       apt-get update && apt-get install -y git
+       git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+       bash ~/blockbench-termux-headless-mcp/scripts/install-blockbench.sh
   5. Then launch the app with:
        export DISPLAY=:0
-       scripts/run-blockbench.sh
+       bash ~/blockbench-termux-headless-mcp/scripts/run-blockbench.sh
 EOF
