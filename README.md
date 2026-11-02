@@ -43,7 +43,7 @@ Or clone this repo in Termux and run the helper instead of the commands above:
 
 ```bash
 pkg install -y git
-git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+git clone https://github.com/Dev-Fantasy/blockbench-termux-headless-mcp.git
 bash ~/blockbench-termux-headless-mcp/scripts/termux-setup.sh
 ```
 
@@ -60,7 +60,7 @@ Inside Ubuntu:
 ```bash
 apt-get update
 apt-get install -y git
-git clone https://github.com/BluePhinix/blockbench-termux-headless-mcp.git
+git clone https://github.com/Dev-Fantasy/blockbench-termux-headless-mcp.git
 cd blockbench-termux-headless-mcp
 bash scripts/install-blockbench.sh
 ```
